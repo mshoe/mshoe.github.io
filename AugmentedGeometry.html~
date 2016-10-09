@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link type="text/css"; rel="stylesheet"; href="AugmentedGeometry.css"/>
+		<link type="text/css"; rel="stylesheet"; href="MathematicalSurfaceRenderer.css"/>
 		<title>Augmented Geometry by mshoe</title>
 	</head>
 	<body>
