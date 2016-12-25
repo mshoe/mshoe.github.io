@@ -5,6 +5,7 @@
 		<title>Enso by Michael Xu</title>
 	</head>
 	<body>
+		
 		<p>
 			<a href="https://mshoe.github.io">
 				Home
@@ -12,19 +13,77 @@
 		</p>
 		<h1>Enso</h1>
 		<p>
-			A game by Michael Xu<br>
-			Unity Engine<br>
-			Enso is a game with two modes, story and arcade. In both modes, you control a ball with the power to manipulate other balls.<br>
-			In Story mode, you must lead red balls which follow you to a certain goal, often involving puzzle solving.<br>
-			In Arcade mode, you must lead red balls to a moving yellow ball. Each red ball that touches the yellow ball increases your score by 1.<br>
-			The challenge is the green balls, which also follow you. If your ball or the green balls touch the yellow ball, it's game over.<br>
-			Red balls spawn frequently, green balls spawn slowly.<br>
+			A game by mshoe.
 		</p>
-		<p>
-			Enso was my first game, and it won 3rd overall as well as the Creativity and Originality prize at UofT's Game Design and Development Club's Game Making Deathmatch.
-		</p>
-		<p>Note: This is an image of the old Unity version. Sadly, Chrome does not officially support Unity Webplayer.<br>
-		That's fine because I plan on remaking the game in C++ and OpenGL (or possibly Vulkan).</p>
-		<img src="http://i.imgur.com/HUTpUVA.png"/>
-	</body>
+		<canvas id="ensoCanvas" width="300" height="300" style="border:1px solid #000000;">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<script>
+			var circleArray = [];
+
+			function Start() {
+				// Setting update interval
+
+				
+				// var circle_1 = new Circle("red", 150, 150);
+				// var circle_2 = new Circle("green", 100, 100);
+				// circleArray[0] = circle_1;
+				// circleArray[1] = circle_2;
+			}
+
+			function Render() {
+				// Render canvas
+				
+				var canvas = document.getElementById("ensoCanvas");
+				var ctx = canvas.getContext("2d");
+				ctx.beginPath();
+				ctx.rect(0, 0, 300, 300);
+				ctx.fillStyle = "teal";
+				ctx.fill();
+				// Render circles
+				// red - radius 5
+				// green - radius 7
+				// var i, cLen;
+				// cLen = circleArray.Length;
+				// for (i = 0; i < cLen; i++) {
+				// 	if (circleArray[i].color == "red") {
+				// 		ctx.beginPath();
+				// 		ctx.fillStyle = "red";
+				// 		ctx.arc(circleArray[i].x, circleArray[i].y, 5, 0, 2*Math.PI);
+				// 		ctx.stroke();
+				// 	}
+				// 	else if (circleArray[i].color == "green") {
+				// 		ctx.beginPath();
+				// 		ctx.fillStyle = "green";
+				// 		ctx.arc(circleArray[i].x, circleArray[i].y, 7, 0, 2*Math.PI);
+				// 		ctx.stroke();
+				// 	}
+				// }
+			}
+
+			function Input() {
+
+			}
+
+			function Update() {
+
+				Input();
+			}
+
+			// function Circle(color, x, y) {
+			// 	this.x = x;
+			// 	this.y = y;
+			// 	if (color == "red") {
+			// 		this.color = "red";
+			// 	}
+			// 	if (color == "green") {
+			// 		this.color = "green";
+			// 	}
+			// }
+
+			Start();
+			var renderTimer = setInterval(Render, 50);
+			var updateTimer = setInterval(Update, 50);
+		</script>
+		<script src = "Enso.js"></script>
 </html>
