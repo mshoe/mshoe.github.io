@@ -24,7 +24,7 @@ body {
 }
 
 a {
-  color: #028D79;
+  color: #ff5100;
   text-decoration: none;
   border: none;
 }
@@ -34,6 +34,7 @@ a img {
 }
 
 a:hover {
+  color: #ff9d00;
   border: none;
 }
 
@@ -73,11 +74,11 @@ h3 {
 }
 
 .about a {
-  color: #444;
+  color: #ff5100;
 }
 
 .about a:hover {
-  color: #777;
+  color: #ff9d00;
 }
 
 #sidebar-name a{
