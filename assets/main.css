@@ -230,6 +230,11 @@ h3 {
   min-height:150px;
 }
 
+.education-row {
+  display: block;
+  min-height:100px
+}
+
 .music-row {
   display: block;
 }
