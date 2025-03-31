@@ -44,6 +44,8 @@ a:hover {
 
 h1 {
   color: #1b016a;
+  word-wrap: break-word;
+  line-height: 1.25;
 }
 
 h2 {

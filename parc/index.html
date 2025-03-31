@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>PARC: Physics-based Augmentation with Reinforcement Learning for Character Controllers</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="description" content="Michael Xu">
+
+      <!-- syntax highlighting CSS -->
+      <link rel="stylesheet" href="../assets/syntax.css">
+
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="../assets/main.css">
+
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="../assets/responsive.css">
+
+      <!-- Google Fonts -->
+      <link href="../assets/css.css" rel="stylesheet" type="text/css">
+
+  </head>
+
+<body>
+
+<div class="site">
+<div class="content" id="home">
+
+<td>
+	<center>
+    <h1>PARC: Physics-based Augmentation with Reinforcement Learning for Character Controllers</h1><br>
+		SIGGRAPH 2025<br>
+		<br>
+		<nobr><a href="https://michaelx.io">Michael Xu</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://yi-shi94.github.io/">Yi Shi</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://www.cs.sfu.ca/~kkyin/">KangKang Yin</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://xbpeng.github.io/">Xue Bin Peng</a> (1, 2)</nobr><br>
+		<br>
+		<nobr>(1) Simon Fraser University</nobr> &emsp;&emsp; <nobr>(2) NVIDIA </nobr><br>
+		<br>
+		<img style="vertical-align:middle" src="./static/images/teaser.png"  width="100%" height="inherit"/>		
+	</center>
+</td>
+
+<br>
+	
+<td>
+	<hr>
+	<h3 style="margin-bottom:10px;">Abstract</h3>
+	Humans excel in navigating diverse, complex environments with agile motor
+skills, exemplified by parkour practitioners performing dynamic maneuvers,
+such as climbing up walls and jumping across gaps. Reproducing these agile
+movements with simulated characters remains challenging, in part due to
+the scarcity of motion capture data for agile terrain traversal behaviors
+and the high cost of acquiring such data. In this work, we introduce PARC
+(Physics-based Augmentation with Reinforcement Learning for Character
+Controllers), a framework that leverages machine learning and physics-
+based simulation to iteratively augment motion datasets and expand the
+capabilities of terrain traversal controllers. PARC begins by training a motion
+generator on a small dataset consisting of core terrain traversal skills. The
+motion generator is then used to produce synthetic data for traversing new
+terrains. However, these generated motions often exhibit artifacts, such as
+incorrect contacts or discontinuities. To correct these artifacts, we train a
+physics-based tracking controller to imitate the motions in simulation. The
+corrected motions are then added to the dataset, which is used to continue
+training the motion generator in the next iteration. PARC’s iterative process
+jointly expands the capabilities of the motion generator and tracker, creat-
+ing agile and versatile models for interacting with complex environments.
+PARC provides an effective approach to develop controllers for agile terrain
+traversal, which bridges the gap between the scarcity of motion data and
+the need for versatile character controllers.
+</td>
+
+<td>
+	<h3> Paper: [<a href="./PARC_2025.pdf">PDF</a>] &nbsp; &nbsp; &nbsp; Code: [<a href="https://github.com/xbpeng/DeepMimic">GitHub</a> / <a href="https://github.com/NVIDIA-Omniverse/IsaacGymEnvs">IsaacGym</a>] &nbsp; &nbsp; &nbsp; Preprint: [<a href="https://arxiv.org/abs/2104.02180">arXiv</a>] </h3>
+</td>
+
+<tr>
+		<h3 style="margin-bottom:10px;">Videos</h3>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/wySUxZN_KbM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		<br><br>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/O6fBSMxThR4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</tr>
+	
+<br>
+<br>
+
+<h3 style="margin-bottom:0px;">Bibtex</h3>
+<pre>
+@article{
+	2021-TOG-AMP,
+	author = {Peng, Xue Bin and Ma, Ze and Abbeel, Pieter and Levine, Sergey and Kanazawa, Angjoo},
+	title = {AMP: Adversarial Motion Priors for Stylized Physics-Based Character Control},
+	journal = {ACM Trans. Graph.},
+	issue_date = {August 2021},
+	volume = {40},
+	number = {4},
+	month = jul,
+	year = {2021},
+	articleno = {1},
+	numpages = {15},
+	url = {http://doi.acm.org/10.1145/3450626.3459670},
+	doi = {10.1145/3450626.3459670},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {motion control, physics-based character animation, reinforcement learning},
+} 
+</pre>
+
+			
+			</div><!-- /.container -->
+		</body>
+		
+		<script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			  ga('create', 'UA-89363010-1', 'auto');
+			  ga('send', 'pageview');
+		</script>
+		
+		<footer>
+	    	<ul>
+				<li><a href="mailto:mxa23@sfu.ca">email</a></li>
+	        	<li><a href="https://github.com/mshoe">github.com/mshoe</a></li>
+			</ul>
+		</footer>
+	</html>
