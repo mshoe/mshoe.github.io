@@ -36,7 +36,7 @@
     <div class="site">
         <div class="content" id="home">
 
-            <h2 class="content-header">PARC: Terrain Generation</h2>
+            <h2 class="content-header">My Computer Graphics Journey</h2>
             <h3 class="content-header-split"></h3>
             <div id="about-me">
                 May 1, 2025.
@@ -46,36 +46,10 @@
                 Read more about PARC <a href="../parc/index.html">here</a>!
 
                 <br><br>
-                In this blog post, I want to describe the details regarding terrain representation, generation, and augmentation. 
-                In our motion dataset, each motion clip has a corresponding terrain representation which compactly captures the environment's geometry with a 2.5 grid-based format.
+                <img src="./parc/memories.png" alt="Centered Image" style="display: block; width: 1000px; height: auto; margin: 0 auto;">
 
                 <br><br>
-                <h1>Terrain Representation</h1>
-                <img src="./parc/terrain_example_mesh_char.png" alt="Centered Image" style="display: block; width: 800px; height: auto; margin: 0 auto;">
-
-                <br><br>
-                <h1>Terrain Generation</h1>
-                In order to expand our dataset, we need to apply our motion generator to traverse out of distribution terrains.
-
-                Random boxes:
-                1. Generate a flat grid
-                2. Generate random boxes (visualize 1, then 5, then 10)
-                3. Maxpool 2x2
-                <br><br>
-                <img src="./parc/random_boxes_demo.png" alt="Centered Image" style="display: block; width: 1000px; height: auto; margin: 0 auto;">
-
-                <br><br>
-                <h1>Terrain Augmentation</h1>
-                To improve the diversity of terrain observations when training the motion generator, we use a terrain augmentation strategy.
-                compute hf max and min bounds using original terrain and motion.
-                <br><br>
-                <img src="./parc/terrain_aug.gif" alt="Centered Image" style="display: block; width: 600px; height: auto; margin: 0 auto;">
-
-                
-                <br><br>
-                <h1>Conclusion</h1>
-
-
+                In this blog post, I want to talk about the journey I went through to finally get to this point.
 
             </div>
         </div>
