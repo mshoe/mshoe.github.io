@@ -65,6 +65,13 @@ h3 {
 
 #pj-header h1 { margin: 0; }
 
+pre {
+	background-color: #EBECE4;
+	border-radius: 3px;
+	white-space: pre-wrap;
+	border: 1px solid gray;
+}
+
 
 /*****************************************************************************/
 /*
