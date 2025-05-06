@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html><head>
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-MRX8SK24');</script>
+	<!-- End Google Tag Manager -->
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>PARC: Physics-based Augmentation with Reinforcement Learning for Character Controllers</title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="description" content="Michael Xu">
+
+      <!-- syntax highlighting CSS -->
+      <link rel="stylesheet" href="../assets/syntax.css">
+
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="../assets/main.css">
+
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="../assets/responsive.css">
+
+      <!-- Google Fonts -->
+      <link href="../assets/css.css" rel="stylesheet" type="text/css">
+	  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Video</title>
+    <style>
+        /* Centering the video */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; Full viewport height */
+        }
+    </style>
+
+  </head>
+
+<body>
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRX8SK24"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+<div class="site">
+<div class="content" id="home">
+
+<td>
+	<center>
+    <h1>PARC: Physics-based Augmentation with Reinforcement Learning for Character Controllers</h1><br>
+		SIGGRAPH 2025<br>
+		<br>
+		<nobr><a href="https://michaelx.io">Michael Xu</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://yi-shi94.github.io/">Yi Shi</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://www.cs.sfu.ca/~kkyin/">KangKang Yin</a> (1)</nobr> &emsp;&emsp; 
+    <nobr><a href="https://xbpeng.github.io/">Xue Bin Peng</a> (1, 2)</nobr><br>
+		<br>
+		<nobr>(1) Simon Fraser University</nobr> &emsp;&emsp; <nobr>(2) NVIDIA </nobr><br>
+		<br>
+		<img style="vertical-align:middle" src="./static/images/teaser.png"  width="100%" height="inherit"/>		
+	</center>
+</td>
+
+<br>
+	
+<td>
+	<hr>
+	<h3 style="margin-bottom:10px;">Abstract</h3>
+	Humans excel in navigating diverse, complex environments with agile motor
+skills, exemplified by parkour practitioners performing dynamic maneuvers,
+such as climbing up walls and jumping across gaps. Reproducing these agile
+movements with simulated characters remains challenging, in part due to
+the scarcity of motion capture data for agile terrain traversal behaviors
+and the high cost of acquiring such data. In this work, we introduce PARC
+(Physics-based Augmentation with Reinforcement Learning for Character
+Controllers), a framework that leverages machine learning and physics-
+based simulation to iteratively augment motion datasets and expand the
+capabilities of terrain traversal controllers. PARC begins by training a motion
+generator on a small dataset consisting of core terrain traversal skills. The
+motion generator is then used to produce synthetic data for traversing new
+terrains. However, these generated motions often exhibit artifacts, such as
+incorrect contacts or discontinuities. To correct these artifacts, we train a
+physics-based tracking controller to imitate the motions in simulation. The
+corrected motions are then added to the dataset, which is used to continue
+training the motion generator in the next iteration. PARC’s iterative process
+jointly expands the capabilities of the motion generator and tracker, creat-
+ing agile and versatile models for interacting with complex environments.
+PARC provides an effective approach to develop controllers for agile terrain
+traversal, which bridges the gap between the scarcity of motion data and
+the need for versatile character controllers.
+</td>
+
+<td>
+	<h3> Code: [coming soon] &nbsp; &nbsp; &nbsp; Preprint: [coming soon] &nbsp; &nbsp; &nbsp;</h3> 
+</td>
+
+<br>
+<center>
+	<h1>Video</h1>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/49sq6jFA29s?si=IXgEVmrCqx7BgQ9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</center>
+
+<br>
+<center>
+	<h1>Method</h1>
+</center>
+PARC iteratively trains a motion generator and motion tracker while expanding a physically accurate motion-terrain dataset.
+At the beginning of each iteration, the motion generator is trained on the current dataset. 
+The trained motion generator is then used to generate kinematic motions, which is used to supply a physics-based motion tracking controller with reference data.
+The motion tracker is trained using reinforcement learning, and is then used to physically correct the generated kinematic motions.
+The physically corrected motions are added back into the dataset for the next iteration.
+<center>
+	<img style="vertical-align:middle" src="./static/images/method-high.png"  width="70%" height="inherit"/>
+	<br>
+</center>
+
+	<br><br>
+
+<!-- <center>
+	<h1>Original Data</h1>
+</center> -->
+
+<center>
+	<h1>PARC Generated Data</h1>
+</center>
+PARC is able to discover interesting phyiscally accurate behaviors for terrain traversal. 
+For example, combining a jumping motions with a climbing motion, even when the original dataset did not contain this combination.
+<div class="video-container">
+<video width="640" height="360" controls>
+	<source src="./static/videos/interesting_behavior.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+</div>
+Another example is dropping from a higher ledge and catching onto a lower ledge. 
+The original dataset contained motions for climbing up and down, but now this specific behavior.
+<div class="video-container">
+<video width="640" height="360" controls>
+	<source src="./static/videos/interesting_behavior_2.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+</div>
+
+<br><br>
+
+<center>
+	<h1>Long Horizon Results</h1>
+</center>
+Using the motion generator and motion tracking controller together, we can generate physically realistic and interesting motions for traversing complex terrain.
+<div class="video-container">
+<video width="640" height="360" controls>
+	<source src="./static/videos/teaser_terrain_siggraph.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+</div>
+
+<div class="video-container">
+<video width="640" height="360" controls>
+	<source src="./static/videos/boxes.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+</div>
+
+<div class="video-container">
+<video width="640" height="360" controls>
+	<source src="./static/videos/monument.mp4" type="video/mp4">
+	Your browser does not support the video tag.
+</video>
+</div>
+
+
+<br>
+<br>
+
+<!-- <h3 style="margin-bottom:0px;">Bibtex</h3>
+<pre>
+@article{
+	2021-TOG-AMP,
+	author = {Peng, Xue Bin and Ma, Ze and Abbeel, Pieter and Levine, Sergey and Kanazawa, Angjoo},
+	title = {AMP: Adversarial Motion Priors for Stylized Physics-Based Character Control},
+	journal = {ACM Trans. Graph.},
+	issue_date = {August 2021},
+	volume = {40},
+	number = {4},
+	month = jul,
+	year = {2021},
+	articleno = {1},
+	numpages = {15},
+	url = {http://doi.acm.org/10.1145/3450626.3459670},
+	doi = {10.1145/3450626.3459670},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {motion control, physics-based character animation, reinforcement learning},
+} 
+</pre> -->
+
+</div><!-- /.container -->
+	</body>
+	
+	
+</html>
