@@ -244,6 +244,11 @@ pre {
   min-height:100px
 }
 
+.work-row {
+  display: block;
+  min-height:95px;
+}
+
 .music-row {
   display: block;
 }
