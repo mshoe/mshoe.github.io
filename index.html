@@ -38,7 +38,19 @@
       <div class="sidebar" id="sidebar">
         <div class="header">
           <!-- <h1 class="title"><a href="https://mshoe.github.io/"><img id="headshot" src="./assets/images/publication/amorphous-objects-alive/window-to-star.gif"></a></h1> -->
-          <h1 class="title"><a href="https://mshoe.github.io/"><img id="headshot" src="./assets/images/portrait/lugano2025.jpg"></a></h1>
+          <div class="headshot-carousel" role="group" aria-label="Profile photo selector">
+            <button class="headshot-arrow headshot-arrow-left" type="button" aria-label="Previous profile photo">
+              <span aria-hidden="true">&#9664;</span>
+            </button>
+            <h1 class="title headshot-wrapper">
+              <a href="https://mshoe.github.io/">
+                <img id="headshot" src="./assets/images/portrait/lugano2025.jpg" alt="Profile photo of Michael Xu">
+              </a>
+            </h1>
+            <button class="headshot-arrow headshot-arrow-right" type="button" aria-label="Next profile photo">
+              <span aria-hidden="true">&#9654;</span>
+            </button>
+          </div>
           <h1 class="title" id="sidebar-name"><a href="https://mshoe.github.io/">Michael Xu</a></h1>
         </div>
 
@@ -214,5 +226,40 @@
 
 </div>
 </div>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    const headshotImages = [
+      "./assets/images/portrait/lugano2025.jpg",
+      "./assets/images/portrait/rocky.jpg",
+      "./assets/images/portrait/star.png",
+    ];
+
+    let currentIndex = 0;
+    const headshot = document.getElementById("headshot");
+    const previousButton = document.querySelector(".headshot-arrow-left");
+    const nextButton = document.querySelector(".headshot-arrow-right");
+
+    if (!headshot || !previousButton || !nextButton || headshotImages.length === 0) {
+      return;
+    }
+
+    currentIndex = Math.floor(Math.random() * headshotImages.length);
+    headshot.src = headshotImages[currentIndex];
+
+    function updateHeadshot(newIndex) {
+      currentIndex = (newIndex + headshotImages.length) % headshotImages.length;
+      headshot.src = headshotImages[currentIndex];
+    }
+
+    previousButton.addEventListener("click", function () {
+      updateHeadshot(currentIndex - 1);
+    });
+
+    nextButton.addEventListener("click", function () {
+      updateHeadshot(currentIndex + 1);
+    });
+  });
+</script>
 <script src="./assets/responsive.js" type="text/javascript"></script>
-</body></html>
+</body>
+</html>
