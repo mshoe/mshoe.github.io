@@ -38,7 +38,21 @@
       <div class="sidebar" id="sidebar">
         <div class="header">
           <!-- <h1 class="title"><a href="https://mshoe.github.io/"><img id="headshot" src="./assets/images/publication/amorphous-objects-alive/window-to-star.gif"></a></h1> -->
-          <h1 class="title"><a href="https://mshoe.github.io/"><img id="headshot" src="./assets/images/portrait/lugano2025.jpg"></a></h1>
+          <div class="headshot-carousel" role="group" aria-label="Profile photo selector">
+            <div class="headshot-stage">
+              <h1 class="title headshot-wrapper">
+                <a href="https://mshoe.github.io/">
+                  <img id="headshot" src="./assets/images/portrait/lugano2025.jpg" alt="Profile photo of Michael Xu" data-headshot-index="0">
+                </a>
+              </h1>
+              <button class="headshot-arrow headshot-arrow-left" type="button" aria-label="Previous profile photo">
+                <span aria-hidden="true">&#9664;</span>
+              </button>
+              <button class="headshot-arrow headshot-arrow-right" type="button" aria-label="Next profile photo">
+                <span aria-hidden="true">&#9654;</span>
+              </button>
+            </div>
+          </div>
           <h1 class="title" id="sidebar-name"><a href="https://mshoe.github.io/">Michael Xu</a></h1>
         </div>
 
@@ -214,5 +228,7 @@
 
 </div>
 </div>
+<script src="./assets/headshot-carousel.js" type="text/javascript"></script>
 <script src="./assets/responsive.js" type="text/javascript"></script>
-</body></html>
+</body>
+</html>

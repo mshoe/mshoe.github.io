@@ -80,6 +80,102 @@ pre {
 /*****************************************************************************/
 #headshot {
   max-width: 185px;
+  width: 100%;
+  display: block;
+}
+
+.headshot-carousel {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.35em;
+}
+
+.headshot-stage {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+}
+
+.headshot-wrapper {
+  margin: 0;
+  display: block;
+  line-height: 0;
+}
+
+.headshot-arrow {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(132, 206, 235, 0.7);
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(27, 1, 106, 0.2);
+  color: #1b016a;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.05rem;
+  height: 36px;
+  justify-content: center;
+  line-height: 1;
+  opacity: 0.88;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  width: 36px;
+  z-index: 1;
+}
+
+.headshot-arrow.is-hidden {
+  display: none;
+}
+
+.headshot-carousel:focus-within .headshot-arrow {
+  opacity: 1;
+}
+
+.headshot-arrow:hover {
+  background-color: rgba(132, 206, 235, 0.95);
+  border-color: rgba(132, 206, 235, 0.95);
+  box-shadow: 0 4px 10px rgba(27, 1, 106, 0.3);
+  color: #ffffff;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.headshot-arrow:focus-visible {
+  outline: 2px solid #31d631;
+  outline-offset: 2px;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.headshot-arrow-left {
+  left: 0.5rem;
+}
+
+.headshot-arrow-right {
+  right: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .headshot-arrow {
+    height: 32px;
+    width: 32px;
+    font-size: 0.95rem;
+  }
+
+  .headshot-arrow-left {
+    left: 0.4rem;
+  }
+
+  .headshot-arrow-right {
+    right: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headshot-arrow {
+    transition: none;
+  }
 }
 
 .about a {
