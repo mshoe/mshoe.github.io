@@ -178,6 +178,46 @@ pre {
   }
 }
 
+.headshot-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  margin-top: 0.35em;
+}
+
+.headshot-wrapper {
+  margin: 0;
+}
+
+.headshot-arrow {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid #84ceeb;
+  border-radius: 9999px;
+  color: #1b016a;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  height: 32px;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  width: 32px;
+}
+
+.headshot-arrow:hover {
+  background-color: #84ceeb;
+  color: #ffffff;
+}
+
+.headshot-arrow:focus-visible {
+  outline: 2px solid #31d631;
+  outline-offset: 2px;
+}
+
 .about a {
   color: #ff5100;
 }
