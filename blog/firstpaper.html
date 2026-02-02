@@ -7,21 +7,28 @@
       <meta name="viewport" content="width=device-width">
       <meta name="description" content="Michael Xu">
 
+
       <!-- syntax highlighting CSS -->
       <link rel="stylesheet" href="../assets/syntax.css">
+
 
       <!-- Custom CSS -->
       <link rel="stylesheet" href="../assets/main.css">
 
+
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="../assets/responsive.css">
+
 
       <!-- Google Fonts -->
       <link href="../assets/css.css" rel="stylesheet" type="text/css">
 
+
   </head>
 
+
 <body>
+
 
     <!-- Navigation Bar -->
     <ul id="nav">
@@ -29,28 +36,383 @@
       <a href="../CV.pdf">CV</a>
       <a href="../guitar/index.html">Guitar</a>
       <a href="../blog/index.html">Blog</a>
-      <!-- <a href="https://medium.com/@mxu.blog">Medium</a>
-      <a href="https://spectra.mathpix.com/@mxu">Spectra</a> -->
+      <a href="../misc/index.html">Misc</a>
     </ul>
+
 
     <div class="site">
         <div class="content" id="home">
 
-            <h2 class="content-header">My Computer Graphics Journey</h2>
+
+            <h2 class="content-header">Records of an Autophagous Character</h2>
             <h3 class="content-header-split"></h3>
             <div id="about-me">
-                May 1, 2025.
+                Feb 1, 2026.
                 <br>
-                My first paper has been accepted to SIGGRAPH 2025. 
-                It describes an AI autophagy method for automatically augmenting a dataset while continually training both a motion generation model and motion tracking controller.
-                Read more about PARC <a href="../parc/index.html">here</a>!
-
                 <br><br>
+                <figure>
                 <img src="./parc/memories.png" alt="Centered Image" style="display: block; width: 1000px; height: auto; margin: 0 auto;">
+                <figcaption  style="text-align: center;">
+                    Early sketches, various experiments in between, and the final demos of my first SIGGRAPH paper.
+                </figcaption>
+                </figure>
 
                 <br><br>
-                In this blog post, I want to talk about the journey I went through to finally get to this point.
+                This blog post is a small record of the research journey behind my first SIGGRAPH paper - PARC: Physics-based Augmentation with Reinforcement Learning for Character Controllers.
 
+                I'm sharing this hoping that reading about some of the challenges I encountered might be useful to others.
+
+                <br><br>
+
+                <h1>Motivation</h1>
+
+                My interest in simulated characters that can traverse complex terrain came from something fairly simple: sandbox games.
+
+                I've always loved environments where the player can build, modify, and explore freely.
+
+                I've also always been interested in games which incorporate physics into their game mechanics.
+
+                As physics simulators become faster and more robust, it seemed to me that eventually, game developers would want to experiment with fully physically simulated characters.
+
+                <br><br>
+
+                If physics-based characters were ever to become mainstream, then the control becomes a very challenging problem.
+                The players can only control them from a high-level with a very low DOF action space (e.g. game controller, keyboard arrow keys or WASD, mouse).
+                The character itself needs a low-level controller to control the high DOF action space (joint torques).
+
+
+                Furthermore, given my own preference for sandbox games, I want these characters to not only navigate across carefully designed levels, 
+                but also across environments that might be user-created or procedurally generated.
+
+
+                <h1>Technology</h1>
+                A widely adopted approach for controlling the low-level action space of bipedal simulated characters is to train policies, via deep reinforcement learning, to track reference motions. This paradigm was introduced in DeepMimic and has since become highly influential in both computer graphics (e.g., ADD, PHC, MaskedMimic) and robotics. As a result, simulated characters can now perform extremely challenging and dynamic behaviors through motion tracking.
+                <br><br>
+                However, reference motions do not constitute a low-dimensional, intuitive control space that humans can directly specify. This motivates the need for a hierarchical framework, in which a high-level controller interprets human intent and generates appropriate reference motions that are then executed by the low-level tracking controller.
+                <br><br>
+
+                <h1>Motion Generator on Flat Ground</h1>
+                We decided to go with a motion diffusion model for our motion generator.
+                On flat ground, these models were actually pretty good. Here is a demo of the first controllable motion generator I trained:
+                <br><br>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/mdm_vis-2024-04-03_03.09.36.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    My first diffusion model trained on running motions going in all directions, using Isaac Gym's visualizer.
+                </figcaption>
+                </figure>
+
+
+                <h1>Motion Generator on Terrain (First attempts)</h1>
+
+                To train a terrain-aware motion generator, we paired motion data with terrain inputs. 
+                We used a simple 2.5D blocky heightmap representation to keep the problem tractable. 
+                I found heuristic methods for generating the terrain to pair with the motion to be insufficient, 
+                so I built a lightweight motion-terrain editor to manually create training examples.
+
+                With this dataset in place, we trained a terrain-conditioned motion generator (architecture details are provided in the PARC paper). Early results were weak: the model occasionally reacted to terrain, but in most cases the generated motions ignored it entirely.
+                <br><br>
+                
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/bad_mdm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    April 30, 2024. Failure of the motion generator with terrain observations.
+                </figcaption>
+                </figure>
+
+
+                <h1>Tools for Manual Data Augmentation</h1>
+                <br><br>
+
+                Well maybe we just need more data?
+                Can we use some motion editing tricks to carve out more data from what we have?
+                Maybe we just need to blend some clips together to improve motion diversity...
+                <br><br>
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/stitch-2024-04-22_19.27.22.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    A video showing a stitching technique using two original motions to create a new motion.
+                </figcaption>
+                </figure>
+
+                <br><br>
+                I am not an animator and using very naive techniques to stitch motion clips together would produce very unnatural motions.
+                This is when I really went into a "physics-based" motion augmentation phase, using DeepMimic controllers trained on poorly stitched kinematic motions to generate new physically correct motions.
+
+                <br><br>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/run_platform_003_terrain_web.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    A video showing a stitched motion, where the transition between running and jumping onto a platform is blended.
+                    Notice that the character slides in an unrealistic way during the turn.
+                </figcaption>
+                </figure>
+
+                <br><br>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/run_platform_003_terrain_dm_slowed_focused.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    A video showing the previously blended motion tracked by a physically simulated character.
+                    Notice that the character places its foot out to make a previously unrealistic motion now physically possible.
+                </figcaption>
+                </figure>
+
+                <br><br>
+
+                Over the course of roughly a month, during which I was visiting home and partially on vacation, I iteratively assessed the types of motions missing from our dataset. My goal was to address these gaps through manual, physics-based augmentation, with the hope that generating a modest set of additional motions would provide sufficient coverage to train a reasonably effective model.
+                <br><br>
+                A key limitation of our dataset was its minimal height variation across terrains. For instance, in climbing scenarios, we only included two distinct wall heights. While it would have been possible to restrict our target environments to match these limited configurations, doing so would have felt like an undesirable compromise. If the demonstration environments were not meaningfully more complex than the training data, it would be difficult to justify the contribution of the motion generator.
+                <br><br>
+                To overcome this, we introduced an initial data augmentation step in which we randomly varied terrain heights throughout the dataset and applied physics-based corrections to post-process the resulting motions. Additionally, we introduced small random spatial perturbations, such as slight stretching, squishing, and rotation, to further increase the diversity of motion trajectories.
+
+                <br><br>
+
+                Then we retrained our model, and it did get slightly better.
+                <h1>Motion Generator on Terrain with a bit more data</h1>
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/mdm_simple_parkour_test-2024-09-11_15.57.34.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    September, 2024.
+                </figcaption>
+                </figure>
+
+                <br><br>
+
+                September was the month our motion generator finally kind of worked.
+
+                Yes it's a little bit better... 
+                These motions may not be that good, and their quality of their output varies a lot.
+                At this stage of the project, we have two options:
+                1. Accept our dataset as final, and refine our training pipeline, model architecture, etc. to squeeze the best performance out of this dataset, or
+                2. Improve the dataset (whether that be quality or quantity) to cover more motions and terrain variations. 
+                My personal feeling was that our dataset was still lacking. 
+                At this time, I've seen the amazing generalization that image diffusion models have, which were trained on internet-scale data. 
+                This convinced me that we would get more meaningful gains by scaling data.
+
+                <h1>Human using Motion Generator on Terrain</h1>
+                This was the start of my art project, where I basically did "prompt engineering" with my barely working motion generators, to create long
+                motions on complex terrains far beyond the initial dataset, then using physics-based correction to give it the final polish.
+                <br><br>
+
+                "Prompt engineering" in this case is a term I'm borrowing from LLM lingo.
+                In this case, it's just trying different seeds, slightly changing the target direction, slightly editing the terrain observations, 
+                changing which frame to continue the autoregressive motion generation from.
+
+                <br><br>
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/mdm castle stairs-2024-09-21_21.47.53 (1).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    A motion I call "Castle Stairs". 
+                    It was made on a custom terrain I designed, and painstakingly generated with lots of trial and error using an MDM we trained on an early version of our dataset.
+                    This would later be cleaned up by being tracked with a physics-based controller before being put in our PARC experiment's initial dataset.
+                </figcaption>
+                </figure>
+
+                <br><br>
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/mdm castle stairs dm-2024-09-22_16.50.04 (1).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    The motion "Castle Stairs" tracked by a physics-based character. Our character couldn't learn the very first climbing part, likely due to the reference motion being too bad.
+                </figcaption>
+                </figure>
+                <br><br>
+                
+                Incorporating these augmented motions back into the dataset and retraining the motion generator provided modest improvements. This suggested that the process could be repeated iteratively. It was enjoyable in some ways, and it reminded me of experimenting with early commercial image models like DALL·E 2 and Midjourney, where small prompt changes could lead to interesting new results.
+                <br><br>
+
+                However, it quickly became clear that this approach was not scalable. Manually designing augmentations is time-consuming, retraining the motion generator is expensive, and training a motion tracker for physics-based correction adds yet another significant computational burden. Over time, I also realized that I did not want to continue training new DeepMimic-style models for every newly generated motion. Instead, the goal was to rely on a single trained motion tracker capable of tracking motions on the fly.
+                <br><br>
+                This naturally raised a key question: how can we automate physics-based augmentation without requiring a human in the loop? It was an ambitious but risky direction, since removing manual guidance introduces many potential failure modes. Yet, given the limited scope of the project and the fact that I was the only person available to perform this manual augmentation, a human-in-the-loop workflow was simply not sustainable. What we needed was a fully automatic physics-based augmentation loop.
+                
+                <h1>PARC</h1>
+
+                PARC is a funny little acronym that sounds like parkour. It stands for: Physics-based Augmentation with Reinforcement learning for Character controllers.
+
+                <br><br>
+
+                If I have to make a very accurate title for this method, it would be: automatic Physics-based motion data Augmentation with Reinforcement learning in simulation and generative modeling for planning for Character controllers.
+
+                <br><br>
+
+                We therefore experimented with a fully automatic PARC loop, which required building a complete data generation pipeline from the ground up. This pipeline needed several key components: a random terrain generator, a path generator to provide a coarse trajectory for the motion model to follow, and a robust motion synthesis process.
+                <br><br>
+                Because our motion generator, trained on the initial dataset, was still relatively unreliable, we had to employ a wide range of practical techniques to increase the likelihood of producing motions that were at least plausible enough for a DeepMimic-style controller to track. At the scale we ultimately aimed for, on the order of thousands of new motions, it was also computationally infeasible to train a separate DeepMimic controller for every generated sequence. Instead, we needed a more efficient training setup capable of producing a single controller that could generalize across the entire motion set and serve as the backbone of our offline physics-based correction process.
+                <br><br>
+                Every design choice in this pipeline had significant downstream consequences. If we discovered that a critical component was missing or poorly specified after starting the PARC process, we often had no choice but to restart the loop from the original dataset and run the full pipeline again. In practice, I had to do this multiple times.
+                <br><br>
+                There are many subtle details in this system that I could discuss at length. 
+                Although I did not have time to fully ablate every design decision, the final pipeline proved effective enough to meet the SIGGRAPH deadline. 
+                For readers interested in a deeper dive, I encourage you to consult the <a href="https://arxiv.org/abs/2505.04002"><b>paper</b></a>, my more detailed <a href="../MichaelXu_MSc_Thesis.pdf"><b>master's thesis</b></a>, and the accompanying <a href="https://github.com/mshoe/PARC/"><b>codebase</b></a>.
+
+                <br><br>
+                <figure>
+                <img src="./parc/parc_highlevel.png" alt="Centered Image" style="display: block; width: 1000px; height: auto; margin: 0 auto;">
+                <figcaption  style="text-align: center;">
+                    A diagram of the "PARC" data augmentation loop.
+                </figcaption>
+                </figure>
+
+                <br><br>
+                <figure>
+                <img src="./parc/generation-pipeline.png" alt="Centered Image" style="display: block; width: 1000px; height: auto; margin: 0 auto;">
+                <figcaption  style="text-align: center;">
+                    A diagram of the data generation pipeline for a PARC loop.
+                </figcaption>
+                </figure>
+                
+                
+                <br><br>
+                <h1>PARC Self-generated Motion Data</h1>
+                By the end of our PARC experiments, we had substantially expanded the dataset, with coverage spanning a wide range of terrain variations. 
+                Below are several representative examples of motions generated automatically through PARC, including both good and bad results.
+                
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/dec2024_teaser_1531_0_opt_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    One of the coolest types of motions is this jump-climb. Our initial dataset has jumping, and it has climbing, but not jumping into climbing. (dec2024_teaser_1531_0_opt_dm)
+                </figcaption>
+                </figure>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/teaser_2358_0_opt_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    A character going through a narrow passage. (teaser_2358_0_opt_dm)
+                </figcaption>
+                </figure>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/boxes_1013_0_opt_flipped_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    Our simulated character doesn't feel pain, so it freely knocks its head on walls. (boxes_1013_0_opt_flipped_dm)
+                </figcaption>
+                </figure>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/boxes_332_1_opt_flipped_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    Some motions can be straight up nonsensical. (boxes_332_1_opt_flipped_dm)
+                </figcaption>
+                </figure>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/teaser_2787_0_opt_flipped_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    (teaser_2787_0_opt_flipped_dm)
+                </figcaption>
+                </figure>
+
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/teaser_3139_1_opt_flipped_dm.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    (teaser_3139_1_opt_flipped_dm)
+                </figcaption>
+                </figure>
+
+                As you can see, our PARC loop left unchecked will produce some "bad" motions.
+                These bad motions get added back into the dataset, making it more likely for our motion generator to produce more bad motions.
+                I believe having either a human or an AI that could filter unwanted motions would greatly improve the PARC loop.
+
+                <br><br>
+                Nonetheless, the motion generator trained on all our good and bad motions can be used to generate long open-loop kinematic motions, which the motion tracker can track to give us long physics-based motions on complex terrain.
+                Please check out our SIGGRAPH video for our more impressive results!
+
+                <br><br>
+                <figure class="youtube-embed">
+                <iframe
+                    src="https://www.youtube.com/embed/49sq6jFA29s"
+                    width="560"
+                    height="315"
+                    title="YouTube video player"
+                    allowfullscreen>
+                </iframe>
+                </figure>
+
+                <br><br>
+
+                As the motion tracker is not trained to track these very long motions, it will often fall down when trying to make an ambitious jump or climb.
+                There's many things that could be done to improve the motion tracker, but that's out of the scope of PARC.
+                <br><br>
+                <figure class="full-width-video">
+                <video controls>
+                    <source src="./parc/ig_gui_civilization-2025-08-15_10.39.29-00.00.02.583-00.00.13.333.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption  style="text-align: center;">
+                    Our motion generator and motion tracker are trained on the same dataset of short motions that the PARC loop generates. 
+                    Using the motion generator to make longer motions can give our motion tracker a challenge.
+                </figcaption>
+                </figure>
+
+                <br><br>
+                In a final experiment, we trained a motion generator from scratch on the final dataset, with reduced diffusion steps and model size, enabling real-time generation on an RTX 4090.
+
+                <br><br>
+                <figure class="youtube-embed">
+                <iframe
+                    src="https://www.youtube.com/embed/fIvNyCv_H58"
+                    width="560"
+                    height="315"
+                    title="YouTube video player"
+                    allowfullscreen>
+                </iframe>
+                </figure>
+                
+                <br><br>
+                I hope you enjoyed reading about this research project!
+                For more details, feel free to check out our paper: <a href="https://arxiv.org/abs/2505.04002"><b>https://arxiv.org/abs/2505.04002</b></a>,
+                and my <a href="../MichaelXu_MSc_Thesis.pdf"><b>master's thesis</b></a>.
+
+                <br><br>
+                For code, check out the GitHub repo for PARC: <a href="https://github.com/mshoe/PARC"><b>https://github.com/mshoe/PARC</b></a>.
+
+                <br><br>
+                For the dataset of PARC generated motions, as well as the initial dataset and some models, check out the Hugging Face repo: <a href="https://huggingface.co/datasets/mxucg/PARC"><b>https://huggingface.co/datasets/mxucg/PARC</b></a>.
             </div>
         </div>
     </div>
@@ -58,8 +420,14 @@
 
 
 
+
+
+
+
     <script src="../assets/responsive.js" type="text/javascript"></script>
-  
+ 
+
 
 </body>
 </html>
+

@@ -91,3 +91,26 @@
 .slideIn {
   margin-left: 0%;
 }
+
+/*****************************************************************************/
+/*
+/* Video
+/*
+/*****************************************************************************/
+
+
+.full-width-video {
+  width: min(100%, 600px);
+  margin: 2rem auto;
+}
+
+.full-width-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.youtube-embed iframe {
+  display: block;
+  margin: 0 auto; /* centers horizontally */
+}
