@@ -424,12 +424,56 @@ pre {
   padding: 3px 10px;
 }
 
+.timeline-date-note {
+  font-weight: 500;
+  font-style: italic;
+  opacity: 0.78;
+}
+
 .timeline-card {
   background: #fbfdff;
   border: 1px solid #d9ebf6;
   border-radius: 10px;
   padding: 14px 16px 2px 16px;
   box-shadow: 0 2px 8px rgba(27, 1, 106, 0.05);
+  position: relative;
+}
+
+.timeline-card--experience {
+  background: #f8fcff;
+  border-color: #cbe4f4;
+}
+
+.timeline-card--education {
+  background: #f8fff9;
+  border-color: #cfe8d2;
+}
+
+.timeline-card--experience:after,
+.timeline-card--education:after {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.67em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 700;
+}
+
+.timeline-card--experience:after {
+  content: "Experience";
+  color: #145377;
+  background: #e3f3ff;
+  border: 1px solid #b6dff9;
+}
+
+.timeline-card--education:after {
+  content: "Education";
+  color: #2b6b35;
+  background: #e8f7ea;
+  border: 1px solid #bfe4c6;
 }
 
 .timeline-links {
@@ -438,6 +482,24 @@ pre {
 
 .timeline-card .publication-info-div {
   padding-bottom: 8px;
+}
+
+@media (max-width: 640px) {
+  .timeline-list {
+    padding-left: 32px;
+  }
+
+  .timeline-list:before {
+    left: 12px;
+  }
+
+  .timeline-item:before {
+    left: -25px;
+  }
+
+  .timeline-card {
+    padding-top: 28px;
+  }
 }
 
 .education-row {
