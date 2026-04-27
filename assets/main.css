@@ -375,6 +375,71 @@ pre {
   min-height:150px;
 }
 
+.timeline-list {
+  list-style-type: none;
+  margin: 0 0 2.5em 0;
+  padding: 0 0 0 42px;
+  position: relative;
+}
+
+.timeline-list:before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: linear-gradient(to bottom, #84CEEB, #1b016a);
+  border-radius: 4px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.timeline-item:before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1b016a;
+  border: 2px solid #84CEEB;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.timeline-year {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #1b016a;
+  background: #edf7fe;
+  border: 1px solid #84CEEB;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.timeline-card {
+  background: #fbfdff;
+  border: 1px solid #d9ebf6;
+  border-radius: 10px;
+  padding: 14px 16px 2px 16px;
+  box-shadow: 0 2px 8px rgba(27, 1, 106, 0.05);
+}
+
+.timeline-links {
+  margin-top: 2px;
+}
+
+.timeline-card .publication-info-div {
+  padding-bottom: 8px;
+}
+
 .education-row {
   display: block;
   min-height:100px
