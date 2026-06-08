@@ -372,7 +372,134 @@ pre {
 
 .publication-row {
   display: block;
-  min-height:150px;
+  min-height:170px;
+}
+
+.timeline-list {
+  list-style-type: none;
+  margin: 0 0 2.5em 0;
+  padding: 0 0 0 42px;
+  position: relative;
+}
+
+.timeline-list:before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: linear-gradient(to bottom, #84CEEB, #1b016a);
+  border-radius: 4px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.timeline-item:before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1b016a;
+  border: 2px solid #84CEEB;
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.timeline-year {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #1b016a;
+  background: #edf7fe;
+  border: 1px solid #84CEEB;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.timeline-date-note {
+  font-weight: 500;
+  font-style: italic;
+  opacity: 0.78;
+}
+
+.timeline-card {
+  background: #fbfdff;
+  border: 1px solid #d9ebf6;
+  border-radius: 10px;
+  padding: 14px 16px 2px 16px;
+  box-shadow: 0 2px 8px rgba(27, 1, 106, 0.05);
+  position: relative;
+}
+
+.timeline-card--experience {
+  background: #f8fcff;
+  border-color: #cbe4f4;
+}
+
+.timeline-card--education {
+  background: #f8fff9;
+  border-color: #cfe8d2;
+}
+
+.timeline-card--experience:after,
+.timeline-card--education:after {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.67em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 700;
+}
+
+.timeline-card--experience:after {
+  content: "Experience";
+  color: #145377;
+  background: #e3f3ff;
+  border: 1px solid #b6dff9;
+}
+
+.timeline-card--education:after {
+  content: "Education";
+  color: #2b6b35;
+  background: #e8f7ea;
+  border: 1px solid #bfe4c6;
+}
+
+.timeline-links {
+  margin-top: 2px;
+}
+
+.timeline-card .publication-info-div {
+  padding-bottom: 8px;
+}
+
+@media (max-width: 640px) {
+  .timeline-list {
+    padding-left: 32px;
+  }
+
+  .timeline-list:before {
+    left: 12px;
+  }
+
+  .timeline-item:before {
+    left: -25px;
+  }
+
+  .timeline-card {
+    padding-top: 28px;
+  }
 }
 
 .education-row {
