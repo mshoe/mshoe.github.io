@@ -114,3 +114,164 @@
   display: block;
   margin: 0 auto; /* centers horizontally */
 }
+
+/**
+ * Main-page mobile layout
+ * Stack the profile/sidebar above the page content and let timeline cards use
+ * the full viewport width so long paper titles and links wrap inside cards.
+ **/
+@media (max-width:720px) {
+  body {
+    font-size: 0.95em;
+  }
+
+  #nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem 0.35rem;
+    height: auto;
+    min-height: 40px;
+    padding: 0.35rem 0.25rem;
+  }
+
+  #nav a {
+    display: inline-block;
+    padding: 0.35rem 0.55rem;
+    font-size: clamp(1rem, 5vw, 1.35rem);
+    line-height: 1;
+  }
+
+  .site {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top-width: 0.75em;
+  }
+
+  .sidebar {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    padding: 1rem;
+    border-right: 0;
+    border-bottom: 1.6px dashed #31D631;
+    text-align: center;
+  }
+
+  .header {
+    padding-top: 0.5em;
+  }
+
+  #sidebar-name {
+    font-size: clamp(2rem, 11vw, 2.5rem);
+    line-height: 1.05;
+  }
+
+  #headshot {
+    max-width: min(185px, 60vw);
+  }
+
+  .content {
+    padding: 1rem;
+    overflow-x: visible;
+  }
+
+  #sidebar-button {
+    display: none;
+  }
+
+  .content-header {
+    max-width: none;
+    width: fit-content;
+    padding-right: 0.75rem;
+  }
+
+  #about-me {
+    font-size: 1.05em;
+    line-height: 1.45;
+  }
+
+  .timeline-list {
+    padding-left: 24px;
+  }
+
+  .timeline-list:before {
+    left: 9px;
+  }
+
+  .timeline-item:before {
+    left: -21px;
+  }
+
+  .timeline-year {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .timeline-card {
+    padding: 28px 12px 4px;
+  }
+
+  .timeline-card--experience:after,
+  .timeline-card--education:after {
+    left: 12px;
+    right: auto;
+    max-width: calc(100% - 24px);
+  }
+
+  .publication-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 0;
+  }
+
+  .thumbnail-div {
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .thumbnail,
+  .thumbnail-logo {
+    width: min(150px, 100%);
+    height: auto;
+  }
+
+  .publication-info-div {
+    width: 100%;
+  }
+
+  .timeline-links {
+    line-height: 1.6;
+  }
+}
+
+@media (max-width:380px) {
+  .content {
+    padding: 0.75rem;
+  }
+
+  .timeline-list {
+    padding-left: 18px;
+  }
+
+  .timeline-list:before {
+    left: 6px;
+  }
+
+  .timeline-item:before {
+    left: -18px;
+  }
+
+  .timeline-card {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

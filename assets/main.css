@@ -73,6 +73,38 @@ pre {
 }
 
 
+
+/*****************************************************************************/
+/*
+/* Mobile-first overflow guards
+/*
+/*****************************************************************************/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+.content,
+.timeline-card,
+.publication-info-div {
+  min-width: 0;
+}
+
+.timeline-card,
+.publication-info-div,
+#about-me {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
 /*****************************************************************************/
 /*
 /* Home
@@ -347,8 +379,8 @@ pre {
 }
 
 .thumbnail-div {
-  float: left;
-  margin-right: 20px;
+  flex: 0 0 170px;
+  margin-right: 0;
   width: 170px;
 }
 
@@ -368,11 +400,15 @@ pre {
   padding-bottom: 15px;
   flex-wrap: wrap;
   flex-direction: column;
+  flex: 1 1 auto;
 }
 
+
 .publication-row {
-  display: block;
-  min-height:170px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  min-height: 170px;
 }
 
 .timeline-list {
