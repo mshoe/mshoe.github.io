@@ -6,13 +6,14 @@ extra_scripts:
   - /assets/headshot-carousel.js
 ---
 <div class="site">
-      <div class="sidebar" id="sidebar">
+  <div class="content" id="home">
+    <section class="about-intro" aria-labelledby="about-heading">
+      <div class="profile-card">
         <div class="header">
-          <!-- <h1 class="title"><a href="https://mshoe.github.io/"><img id="headshot" src="./assets/images/publication/amorphous-objects-alive/window-to-star.gif"></a></h1> -->
           <div class="headshot-carousel" role="group" aria-label="Profile photo selector">
             <div class="headshot-stage">
               <h1 class="title headshot-wrapper">
-                <a href="https://mshoe.github.io/">
+                <a href="{{ '/index.html' | relative_url }}">
                   <img id="headshot" src="./assets/images/portrait/lugano2025.jpg" alt="Profile photo of Michael Xu" data-headshot-index="0">
                 </a>
               </h1>
@@ -24,44 +25,20 @@ extra_scripts:
               </button>
             </div>
           </div>
-          <h1 class="title" id="sidebar-name"><a href="https://mshoe.github.io/">Michael Xu</a></h1>
+          <h1 class="title" id="profile-name"><a href="{{ '/index.html' | relative_url }}">Michael Xu</a></h1>
         </div>
-
-        <div class="about" id="about-links">
-          <a href="https://www.linkedin.com/in/mxucg/" style="text-decoration:none">
-            <img src="./assets/images/contact/linkedin_circle_blue.jpg" type="image/jpg" style="vertical-align:middle" width="36px">
-          </a>
-          &nbsp;
-          <a href="https://github.com/mshoe" style="text-decoration:none">
-            <img src="./assets/images/contact/github_circle_black.svg" type="image/svg+xml" style="vertical-align:middle" width="36px">
-          </a>
-		       &nbsp;
-          <a href="https://www.youtube.com/channel/UC4qfNTQgecwtluc0M5HRnTw" style="text-decoration:none">
-            <img src="./assets/images/contact/youtube.png" type="image/png" style="vertical-align:middle" width="36px">
-          </a>
-          &nbsp;
-          <a href="https://twitter.com/mxu_cg" style="text-decoration:none">
-            <img src="./assets/images/contact/twitter_circle_blue.png" type="image/png" style="vertical-align:middle" width="32px">
-          </a>
-          &nbsp;
-          
-        </div>
-
       </div>
-
-<div class="content" id="home">
-  <div id="sidebar-button">
-    <img src="./assets/sidebar-button.png">
-  </div>
-
-<h2 class="content-header">About Me</h2>
-<h3 class="content-header-split"></h3>
-<div id="about-me">
-  <p><span style="font-size:100%;">I</span> am a Research Engineer at <a href="https://www.1x.tech/">1x</a>, working on physics simulation for robotics, reinforcement learning, and world model policies. Previously, I worked on simulated character controllers during my MSc in Computing Science at Simon Fraser University, advised by Prof. <a href="https://xbpeng.github.io/">Xue Bin Peng</a>.
-    Before that, I completed my BASc in Engineering Science at the University of Toronto, where I completed an undergraduate thesis on material point method simulation advised by Prof. <a href="http://www.cs.toronto.edu/~diwlevin/">David I.W. Levin</a>. 
-    I also spent a few years developing physical simulation software at <a href="https://www.rocscience.com/">Rocscience</a>, and a summer working on generative modeling techniques for character animation at <a href="https://studios.disneyresearch.com/">Disney Research Studios</a>, advised by <a href="https://studios.disneyresearch.com/people/jakob-buhmann/">Jakob Buhmann</a> and <a href="https://www.martinguay.net/">Martin Guay</a>.
-  </p>
-</div>
+      <div class="about-copy">
+        <h2 class="content-header" id="about-heading">About Me</h2>
+        <h3 class="content-header-split"></h3>
+        <div id="about-me">
+          <p><span style="font-size:100%;">I</span> am a Research Engineer at <a href="https://www.1x.tech/">1x</a>, working on physics simulation for robotics, reinforcement learning, and world model policies. Previously, I worked on simulated character controllers during my MSc in Computing Science at Simon Fraser University, advised by Prof. <a href="https://xbpeng.github.io/">Xue Bin Peng</a>.
+            Before that, I completed my BASc in Engineering Science at the University of Toronto, where I completed an undergraduate thesis on material point method simulation advised by Prof. <a href="http://www.cs.toronto.edu/~diwlevin/">David I.W. Levin</a>.
+            I also spent a few years developing physical simulation software at <a href="https://www.rocscience.com/">Rocscience</a>, and a summer working on generative modeling techniques for character animation at <a href="https://studios.disneyresearch.com/">Disney Research Studios</a>, advised by <a href="https://studios.disneyresearch.com/people/jakob-buhmann/">Jakob Buhmann</a> and <a href="https://www.martinguay.net/">Martin Guay</a>.
+          </p>
+        </div>
+      </div>
+    </section>
 
 <h2 name="publication" class="content-header">Timeline</h2>
 <h3 class="content-header-split"></h3>

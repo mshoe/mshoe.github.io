@@ -23,13 +23,29 @@
 
   <body>
     <!-- Navigation Bar -->
-    <ul id="nav">
-      <a href="{{ '/index.html' | relative_url }}">Home</a>
-      <a href="{{ '/CV.pdf' | relative_url }}">CV</a>
-      <a href="{{ '/guitar/index.html' | relative_url }}">Guitar</a>
-      <a href="{{ '/blog/index.html' | relative_url }}">Blog</a>
-      <a href="{{ '/misc/index.html' | relative_url }}">Misc</a>
-    </ul>
+    <header id="nav">
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="{{ '/index.html' | relative_url }}">Home</a>
+        <a href="{{ '/CV.pdf' | relative_url }}">CV</a>
+        <a href="{{ '/guitar/index.html' | relative_url }}">Guitar</a>
+        <a href="{{ '/blog/index.html' | relative_url }}">Blog</a>
+        <a href="{{ '/misc/index.html' | relative_url }}">Misc</a>
+      </nav>
+      <nav class="nav-socials" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/mxucg/" aria-label="LinkedIn">
+          <img src="{{ '/assets/images/contact/linkedin_circle_blue.jpg' | relative_url }}" alt="">
+        </a>
+        <a href="https://github.com/mshoe" aria-label="GitHub">
+          <img src="{{ '/assets/images/contact/github_logo.png' | relative_url }}" alt="">
+        </a>
+        <a href="https://www.youtube.com/channel/UC4qfNTQgecwtluc0M5HRnTw" aria-label="YouTube">
+          <img src="{{ '/assets/images/contact/youtube.png' | relative_url }}" alt="">
+        </a>
+        <a href="https://twitter.com/mxu_cg" aria-label="X / Twitter">
+          <img src="{{ '/assets/images/contact/twitter_circle_blue.png' | relative_url }}" alt="">
+        </a>
+      </nav>
+    </header>
 
     {% if page.disable_content_wrapper %}
       {{ content }}

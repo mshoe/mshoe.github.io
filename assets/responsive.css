@@ -42,6 +42,10 @@
     padding-right: 3em;
   }
 
+  .about-intro {
+    gap: 1.75rem;
+  }
+
   .footer {
     font-size: 0.85em;
   }
@@ -63,22 +67,9 @@
     font-size: 2.5em;
   }
 
-  .sidebar {
-    transition: 1s;
-    margin-left: -100%;
-    z-index: 3;
-    width: 35%;
-    padding-left: 1.75em;
-  }
-
   .content {
     z-index: 1;
     padding-right: 2em;
-  }
-
-  #sidebar-button {
-    display: block;
-    z-index: 2;
   }
 }
 
@@ -129,18 +120,37 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 0.2rem 0.35rem;
     height: auto;
     min-height: 40px;
     padding: 0.35rem 0.25rem;
   }
 
-  #nav a {
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
     display: inline-block;
     padding: 0.35rem 0.55rem;
-    font-size: clamp(1rem, 5vw, 1.35rem);
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
     line-height: 1;
+  }
+
+  .nav-socials {
+    padding-right: 0.35rem;
+  }
+
+  .nav-socials a {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nav-socials img {
+    width: 24px;
+    height: 24px;
   }
 
   .site {
@@ -152,21 +162,7 @@
     border-top-width: 0.75em;
   }
 
-  .sidebar {
-    float: none;
-    width: 100%;
-    margin-left: 0;
-    padding: 1rem;
-    border-right: 0;
-    border-bottom: 1.6px dashed #31D631;
-    text-align: center;
-  }
-
-  .header {
-    padding-top: 0.5em;
-  }
-
-  #sidebar-name {
+  #profile-name {
     font-size: clamp(2rem, 11vw, 2.5rem);
     line-height: 1.05;
   }
@@ -180,8 +176,18 @@
     overflow-x: visible;
   }
 
-  #sidebar-button {
-    display: none;
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .profile-card {
+    justify-self: center;
+  }
+
+  .about-copy {
+    text-align: left;
   }
 
   .content-header {

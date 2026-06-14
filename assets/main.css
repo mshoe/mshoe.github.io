@@ -114,6 +114,9 @@ iframe {
   max-width: 185px;
   width: 100%;
   display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .headshot-carousel {
@@ -258,12 +261,38 @@ iframe {
   color: #ff9d00;
 }
 
-#sidebar-name a{
+#profile-name a {
   color: inherit;
 }
 
-#sidebar-name {
+#profile-name {
   font-size: 235%;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 2.25rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-card {
+  align-self: start;
+}
+
+.profile-card .header {
+  padding-top: 0;
+}
+
+.about-copy {
+  min-width: 0;
+}
+
+.about-copy #about-me {
+  margin-bottom: 0;
 }
 
 .about p {
@@ -735,34 +764,64 @@ iframe {
 /*****************************************************************************/
 
 #nav {
-  position: static;
-  top: 0;
-  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   z-index: 9999;
   width: 100%;
-  height: 40px;
+  min-height: 48px;
+  padding: 0.35rem max(1rem, calc((100vw - 1100px) / 2));
   background-color: #1b016a;
-  text-align:left;
+  text-align: left;
 }
 
-#nav place-holder {
-  padding-left: 140px;
+.nav-links,
+.nav-socials {
+  display: flex;
+  align-items: center;
 }
 
-#nav li {
-  padding-left: 30px;
-  padding-right: 30px;
-  font-size: 2em;
+.nav-links {
+  gap: 0.15rem;
+}
+
+.nav-links a {
+  padding: 0.45rem 0.75rem;
+  font-size: 1.35rem;
   font-weight: bold;
-  display:inline;
   color: #fafafa;
 }
 
-#nav a {
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 2em;
-  font-weight: bold;
-  display:inline;
-  color: #fafafa;
+.nav-socials {
+  gap: 0.55rem;
+  padding-right: 0.75rem;
+}
+
+.nav-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav-socials a:hover,
+.nav-socials a:focus-visible {
+  opacity: 0.78;
+  transform: translateY(-1px);
+}
+
+.nav-socials a:focus-visible {
+  outline: 2px solid #31d631;
+  outline-offset: 2px;
+}
+
+.nav-socials img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
 }
