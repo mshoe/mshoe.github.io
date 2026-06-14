@@ -31,12 +31,19 @@
       <a href="{{ '/misc/index.html' | relative_url }}">Misc</a>
     </ul>
 
-    <div class="site">
-      <div class="content" id="home">
-        {{ content }}
+    {% if page.disable_content_wrapper %}
+      {{ content }}
+    {% else %}
+      <div class="site">
+        <div class="content" id="home">
+          {{ content }}
+        </div>
       </div>
-    </div>
+    {% endif %}
 
+    {% for script in page.extra_scripts %}
+      <script src="{{ script | relative_url }}" type="text/javascript"></script>
+    {% endfor %}
     <script src="{{ '/assets/responsive.js' | relative_url }}" type="text/javascript"></script>
   </body>
 </html>
