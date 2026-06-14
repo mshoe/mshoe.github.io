@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -eu
+
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+export RUBYOPT="-r${root}/_plugins/ruby_compat.rb${RUBYOPT:+ ${RUBYOPT}}"
+
+exec bundle exec jekyll "$@"
