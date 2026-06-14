@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Michael Xu</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="{{ page.description | default: site.description | default: 'Michael Xu' }}">
+
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="{{ '/assets/syntax.css' | relative_url }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{ '/assets/responsive.css' | relative_url }}">
+
+    <!-- Google Fonts -->
+    <link href="{{ '/assets/css.css' | relative_url }}" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <ul id="nav">
+      <a href="{{ '/index.html' | relative_url }}">Home</a>
+      <a href="{{ '/CV.pdf' | relative_url }}">CV</a>
+      <a href="{{ '/guitar/index.html' | relative_url }}">Guitar</a>
+      <a href="{{ '/blog/index.html' | relative_url }}">Blog</a>
+      <a href="{{ '/misc/index.html' | relative_url }}">Misc</a>
+    </ul>
+
+    <div class="site">
+      <div class="content" id="home">
+        {{ content }}
+      </div>
+    </div>
+
+    <script src="{{ '/assets/responsive.js' | relative_url }}" type="text/javascript"></script>
+  </body>
+</html>
