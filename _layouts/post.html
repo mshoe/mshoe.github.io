@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<h2 class="content-header">{{ page.title }}</h2>
+<h3 class="content-header-split"></h3>
+<div id="about-me">
+  {% if page.display_date %}
+    {{ page.display_date }}.
+    <br>
+  {% elsif page.date %}
+    {{ page.date | date: "%b %-d, %Y" }}.
+    <br>
+  {% endif %}
+  {{ content }}
+</div>
